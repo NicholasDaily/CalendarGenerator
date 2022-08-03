@@ -1,0 +1,83 @@
+<html>
+	<head>
+		<title>Calendar - Form</title>
+		<style>
+		
+			*{
+				box-sizing: border-box;
+			}
+		
+			section{
+				display: block;
+				width: 100%;
+				padding-top: 50px;
+				padding-bottom: 50px;
+				margin-left: auto;
+				margin-right: auto;
+				text-align: center;
+			}
+			
+			h1{
+				text-align: center;
+			}
+			
+			form{
+				border: solid 1px black;
+				border-radius: 15px;
+				width: 50%;
+				min-width: 600px;
+				position: relative;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			
+			
+			#file{
+				color: transparent;
+				width: 90px;
+			}
+			
+			.hidden{
+				display: none;
+			}
+		</style>
+		<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+	</head>
+<body>
+	<h1>Calendar Generator</h1>
+    <form method="POST" action="/calendar">
+    	<section>
+			<label for="date">Month and year:</label>
+			<input type="month" name="date">
+		</section>
+		<section>
+			<label for="url">Link to image:</label>
+			<input type="text" name="url" id="url" placeholder="http://website/example.png">
+			<br>
+			<label for="image"><span class="material-icons">image</span></label>
+			<input id="image" class="hidden" name="image" type="file" onchange="populateImage(this)">
+		</section>
+		<section id="submit">
+			<input type="submit" name="submit" value="submit"/>
+		</section>
+	</form>
+	<img id="img" class="hidden" onload="getURL(this)">
+	<script type="text/javascript">
+		function populateImage(input){
+			var img = input.files[0];
+			var image = document.getElementById("img");
+			image.src = URL.createObjectURL(img);
+		}
+		
+		function getURL(image){
+			const canvas = document.createElement('canvas');
+			const ctx = canvas.getContext('2d');
+			canvas.width = image.width;
+			canvas.height = image.height;
+			ctx.drawImage(image, 0, 0);
+			document.getElementById("url").value = canvas.toDataURL("image/jpeg");
+		}
+	</script>
+</body>
+</html>
