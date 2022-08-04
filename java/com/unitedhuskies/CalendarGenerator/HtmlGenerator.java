@@ -72,6 +72,10 @@ public class HtmlGenerator
         this.elementContent = elementContent;
     }
     
+    public void appendContent(HtmlGenerator x) {
+    	this.elementContent += x.returnHtmlLine();
+    }
+    
     public String returnHtmlLine() {
         this.htmlElement.append("<" + this.tagName);
         if (!this.attributeValues.isEmpty()) {

@@ -34,68 +34,9 @@ public class CalendarController {
 		document +="<html>";
 		document +="<head>";
 		document +="<link type=\"text/css\" rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@1&display=swap\">";
-		document +="<style>";
-		document += "table {\n" 
-				+ "     border-collapse: collapse;\n"
-				+ "     margin-left: auto;\n"
-				+ "     margin-right: auto;\n"
-				+ "     width: 90%;\n"
-				+ "     max-width: 1154.410px;\n"
-				+ "}\n"
-				+ " td{\n"
-				+ "     border: solid 1px black;\n"
-				+ "}\n"
-				+ " td {\n"
-				+ "     width: 150px;\n"
-				+ "     height: 150px;\n"
-				+ "     padding: 0;\n"
-				+ "     position: relative;\n"
-				+ "     vertical-align: bottom;\n"
-				+ "}\n"
-				+ " img {\n"
-				+ "     display: block;\n"
-				+ "     margin: 0 auto;\n"
-				+ "     width: 90%;\n"
-				+ "     max-width: 1154.410px;\n"
-				+ "}\n"
-				+ " #heading {\n"
-				+ "     margin-left: auto;\n"
-				+ "     margin-right: auto;\n"
-				+ "     width: 90%;\n"
-				+ "     border-bottom: solid 3px black;\n"
-				+ "     margin-bottom: 25px;\n"
-				+ "     max-width: 1154.410px;\n"
-				+ "}\n"
-				+ " #heading h1 {\n"
-				+ "     margin-bottom: 0;\n"
-				+ "}\n"
-				+ " #heading::after {\n"
-				+ "     content: \"\";\n"
-				+ "     clear: both;\n"
-				+ "     display: table;\n"
-				+ "}\n"
-				+ " #monthName, #year {\n"
-				+ "     letter-spacing: 5px;\n"
-				+ "}\n"
-				+ " #monthName {\n"
-				+ "     float: left;\n"
-				+ "}\n"
-				+ " #year {\n"
-				+ "     float: right;\n"
-				+ "}\n"
-				+ " .dayNumber {\n"
-				+ "     position: absolute;\n"
-				+ "     top: -20px;\n"
-				+ "     left: 5px;\n"
-				+ "     font-weight: bold;\n"
-				+ "     font-size: 25px;\n"
-				+ "     font-family: serif;\n"
-				+ "}\n"
-				+ " .afterMonth, .beforeMonth {\n"
-				+ "     color: rgb(200, 200, 200);\n"
-				+ "}\n"
-				+ " ";
-		document +="</style>";
+		document +="<link type=\"text/css\" rel=\"stylesheet\" href=\"calendar-style.css\">";
+		
+		
 		document +="</head>";
 		document +="<body>";
 		final ArrayList<String[]> elementAttributes = new ArrayList<String[]>();
@@ -164,6 +105,14 @@ public class CalendarController {
                     element = new HtmlGenerator("p", String.valueOf(dayDate), elementAttributes);
                     element = new HtmlGenerator("td", String.valueOf(element.returnHtmlLine()) + dayEvent, true);
                     elementAttributes.clear();
+                    elementAttributes.add(new String[] {"class", "eventAppendArea"});
+                    HtmlGenerator addEvent = new HtmlGenerator("div", "", elementAttributes, true);
+                    element.appendContent(addEvent);
+                    elementAttributes.clear();
+                    elementAttributes.add(new String[] {"class", "addEvent"});
+                    addEvent = new HtmlGenerator("p", "+", elementAttributes);
+                    element.appendContent(addEvent);
+                    elementAttributes.clear();
                     ++dayDate;
                 }
                 else if (dayDate == 1 && k <= month.getDayOfWeek().ordinal()) {
@@ -207,6 +156,7 @@ public class CalendarController {
         parentElement = "";
         parentElement += element.returnHtmlLine();
         document += parentElement.toString();
+        document +="<script type=\"text/javascript\" src=\"calendar.js\"></script>";
 		document +="</body>";
 		document +="</html>";
 		
