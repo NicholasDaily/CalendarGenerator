@@ -1,3 +1,7 @@
+*{
+  box-sizing:  border-box;
+}
+
 table { 
   border-collapse: collapse;
   margin-left: auto;
@@ -119,6 +123,33 @@ img {
 
 .no-display{
   display:  hidden;
+}
+
+#colorHolder{
+  height: 54px;
+  width: 100%;
+  padding: 2px;
+  backgroundColor: whitesmoke;
+  border: solid 1px silver;
+}
+
+.historyColor{
+  width: 50px;
+  height: 50px;
+  border-width: 10px;
+  border-style: solid;
+  display: inline-block;
+  float: left;
+  outline: solid 1px black;
+  margin-right: 2px;
+}
+
+.eventText{
+  padding: 2px;
+}
+
+.historyColor:hover{
+  cursor: pointer;
 }
 
 @media print{
