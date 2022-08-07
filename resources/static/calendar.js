@@ -1,3 +1,15 @@
+eventTextSizeCheckbox = document.createElement("input");
+eventTextSizeCheckbox.setAttribute("type", "checkbox");
+eventTextSizeLabel = document.createElement("label");
+eventTextSizeLabel.innerText = "Larger event text size: ";
+eventTextSizeCheckbox.classList.add("no-print");
+eventTextSizeLabel.classList.add("no-print");
+
+
+body = document.querySelector("body");
+body.prepend(eventTextSizeCheckbox);
+body.prepend(eventTextSizeLabel);
+
 formContainer = document.createElement("div");
 form = document.createElement("div");
 label = document.createElement("label");
@@ -70,7 +82,7 @@ form.classList.add("eventForm");
 formContainer.id = "eventFormContainer";
 formContainer.appendChild(form);
 formContainer.classList.add("no-print");
-document.querySelector("body").appendChild(formContainer);
+body.appendChild(formContainer);
 formContainer = document.getElementById("eventFormContainer");
 formContainer.style.display = "none";
 
@@ -95,6 +107,21 @@ colorHolder.onclick = function(e){
 		previewDiv.style.background = "rgb(" + inputColorR.value 
 		+ ", " + inputColorG.value + ", " + inputColorB.value + ")";
 		saveColor = false;
+	}
+}
+
+eventTextSizeCheckbox.onclick = function(e){
+	events = document.querySelectorAll(".eventText");
+	for(i = 0; i < events.length; i++){
+		if(eventTextSizeCheckbox.checked){
+			if(!events[i].classList.contains("eventTextLarge")){
+				events[i].classList.add("eventTextLarge");
+			}
+		}else{
+			if(events[i].classList.contains("eventTextLarge")){
+				events[i].classList.remove("eventTextLarge");
+			}
+		}
 	}
 }
 
